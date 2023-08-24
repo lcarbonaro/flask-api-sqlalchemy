@@ -1,0 +1,17 @@
+from app import db,Product,Buyer,Review
+db.create_all()
+p = Product(desc="thing one",price=1.23,qty=44)
+db.session.add(p)
+db.session.commit()
+b1 = Buyer(name="Tom")
+b2 = Buyer(name="Jane")
+db.session.add_all([b1,b2])
+db.session.commit()
+r1 = Review(comment="great thing to buy",product_id=p.id,buyer_id=b1.id)
+r2 = Review(comment="meh not the greatest",product_id=p.id,buyer_id=b2.id)
+db.session.add_all([r1,r2])
+db.session.commit()
+Product.query.get(1).to_dict()
+Buyer.query.get(1).to_dict()
+
+
